@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Commandes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Gestion</div>
+        <ul>
+            <li class="active if section == 'commandes' else '' "><a href="{{ url_for('admin', section='commandes') }}"><i class="fas fa-users"></i> Commandes</a></li>
+            <li><a href="{{ url_for('admin', section='menu') }}"><i class="fas fa-box"></i> Menu</a></li>
+            <li><a href="{{ url_for('logout_admin') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Commandes</h1>
+            </div>
+            <div class="header-right">
+                <form class="search-bar" action="{{ url_for('search_commandes') }}" method="get">
+                    <input id="search-input" type="text" name="n" placeholder="Rechercher..." value="{{ n or '' }}">
+                    <i class="fas fa-search"></i>
+                </form>
+                <div id="spinner" style="display:none; text-align:center; margin:10px 0;">
+                    <i class="fas fa-spinner fa-spin" style="font-size:24px; color:#007BFF;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="card">
+                <h2>Commandes</h2>
+                <p id="result-count" style="margin: 10px 0; font-weight: bold;"></p>
+
+                {% if commandes %}
+                    <!-- Table filtrée -->
+                    <table id="filtered-table" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                                <th>Téléphone</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            {% for com in commandes %}
+                            <tr>
+                                <td>{{ com[0] }}</td>
+                                <td>{{ com[1] }}</td>
+                                <td>{{ com[2] }}</td>
+                                <td>{{ com[3] }}</td>
+                                <td>{{ com[4] }}</td>
+                                <td>{{ com[5] }}</td>
+                                <td>{{ com[6] }}</td>
+                                <td>
+                                    <a href="/delete/{{ com[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun résultat pour "{{ n }}"</p>
+                {% endif %}
+
+                <script>
+                    const initialData = {{ commandes | tojson | safe }};
+                </script>
+
+                {% if commandes %}
+                    <!-- Table complète -->
+                    <table id="full-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                                <th>Téléphone</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-body">
+                            {% for com in commandes %}
+                            <tr>
+                                <td>{{ com[0] }}</td>
+                                <td>{{ com[1] }}</td>
+                                <td>{{ com[2] }}</td>
+                                <td>{{ com[3] }}</td>
+                                <td>{{ com[4] }}</td>
+                                <td>{{ com[5] }}</td>
+                                <td>{{ com[6] }}</td>
+                                <td>
+                                    <a href="/delete/{{ com[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun résultat pour "{{ n }}"</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script_commandes.js') }}"></script>
+<script src="{{ url_for('static', filename='research_commandes.js') }}"></script>
+</body>
+</html>

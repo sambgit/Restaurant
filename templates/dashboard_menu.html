@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Commandes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard_admin.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">Gestion</div>
+        <ul>
+            <li ><a href="{{ url_for('admin', section='commandes') }}"><i class="fas fa-users"></i> Commandes</a></li>
+            <li class="active if section == 'menu' else '' "><a href="{{ url_for('admin', section='menu') }}"><i class="fas fa-box"></i> Menu</a></li>
+            <li><a href="{{ url_for('logout_admin') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>menus</h1>
+            </div>
+            <div class="header-right">
+                <form class="search-bar" action="{{ url_for('search_menus') }}" method="get">
+                    <input id="search-input" type="text" name="f" placeholder="Rechercher..." value="{{ f or '' }}">
+                    <i class="fas fa-search"></i>
+                </form>
+                <div id="spinner" style="display:none; text-align:center; margin:10px 0;">
+                    <i class="fas fa-spinner fa-spin" style="font-size:24px; color:#007BFF;"></i>
+                </div>
+            </div>
+        </div>
+    <!-- Content -->
+        <div class="content">
+            <div class="card">
+                <h2>menus</h2>
+                <a href="/admin/ajouter_menu" id="add-user-btn" class="btn">Ajouter un menu</a>
+                <p id="result-count" style="margin: 10px 0; font-weight: bold;"></p>
+
+                {% if menus %}
+                    <!-- Table filtrée -->
+                    <table id="filtered-table" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>prix</th>
+                                <th>Image</th>
+                                <th>Categorie</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            {% for men in menus %}
+                            <tr>
+                                <td>{{ men[0] }}</td>
+                                <td>{{ men[1] }}</td>
+                                <td>{{ men[2] }}</td>
+                                <td>{{ men[3] }}</td>
+                                <td>{{ men[4] }}</td>
+                                <td>{{ men[5] }}</td>
+                                <td>{{ men[6] }}</td>
+                                <td>
+                                    <a href="/edit_menu/{{ men[0] }}" class="button">Modifier</a>
+                                    <a href="/delete/{{ men[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun résultat pour "{{ f }}"</p>
+                {% endif %}
+
+                <script>
+                    const initialData = {{ menus | default([]) | tojson | safe }};
+                </script>
+
+                {% if menus %}
+                    <!-- Table complète -->
+                    <table id="full-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>prix</th>
+                                <th>Image</th>
+                                <th>Categorie</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-body">
+                            {% for men in menus %}
+                            <tr>
+                                <td>{{ men[0] }}</td>
+                                <td>{{ men[1] }}</td>
+                                <td>{{ men[2] }}</td>
+                                <td>{{ men[3] }}</td>
+                                <td>{{ men[4] }}</td>
+                                <td>{{ men[5] }}</td>
+                                <td>{{ men[6] }}</td>
+                                <td>
+                                    <a href="/edit_menu/{{ men[0] }}" class="button">Modifier</a>
+                                    <a href="/delete/{{ men[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Aucun résultat pour "{{ f }}"</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script_menu.js') }}"></script>
+<script src="{{ url_for('static', filename='research_menu.js') }}"></script>
+</body>
+</html>

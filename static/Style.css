@@ -1,0 +1,89 @@
+.profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.w-10 {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-info{
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: #222;
+    color: white;
+    border-radius: 6px;
+    width: 220px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    padding: 10px;
+    z-index: 100;
+}
+.profile-info.hidden{
+    display: none;
+}
+
+.logout-btn, .login-btn {
+    display: block;
+    padding: 8px;
+    background: #ff5555;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.login-banner{
+    margin-bottom: 8px;
+}
+
+body {
+    background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+    color: #F5F5F5;
+    min-height: 100vh;
+    font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+.glass-card {
+    background: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recipe-card {
+    transition: all 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.category-btn {
+    transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-btn {
+    transition: all 0.3s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+.hero-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+}
+
+#confirmationBanner.show {
+    right: 20px; /* position visible */
+    opacity: 1;  /* devient visible */
+}

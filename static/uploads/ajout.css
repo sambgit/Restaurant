@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1A1A1A;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+form {
+  background-color: #2D3748;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #FFD700;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #FFD700;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #1A1A1A;
+  border: 1px solid #4A5568;
+  color: #fff;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select option {
+  background-color: #1A1A1A;
+  color: #fff;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #FFD700;
+  color: #1A1A1A;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #FFC300;
+}
+
+@media (max-width: 600px) {
+  form {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}

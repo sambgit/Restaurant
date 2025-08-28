@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passer une commande – CoinduFood</title>
+
+    <!-- Tailwind + Font Awesome + Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFD700',
+                        secondary: '#4ADE80',
+                        dark: '#1A1A1A',
+                        glass: 'rgba(30, 30, 30, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="font-sans bg-dark text-white">
+    <div class="max-w-2xl mx-auto mt-10 p-6 glass-card rounded-lg shadow-lg">
+        <h1 class="text-3xl font-display text-primary mb-6 text-center">Passer une commande</h1>
+
+        <form method="POST" action="/commandes" class="space-y-4">
+            <div>
+                <label for="prenom" class="block mb-1">Prénom</label>
+                <input type="text" name="prenom" id="prenom" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            <div>
+                <label for="nom" class="block mb-1">Nom</label>
+                <input type="text" name="nom" id="nom" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            <div>
+                <label for="address" class="block mb-1">Adresse</label>
+                <input type="text" name="address" id="address" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary">
+            </div>
+            <div>
+                <label for="menu" class="block mb-1">Menu choisi</label>
+                <select name="menu" id="menu" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Burger">Burger</option>
+                    <option value="Pizza">Pizza</option>
+                    <option value="Tacos">Tacos</option>
+                    <option value="Salade">Salade</option>
+                </select>
+            </div>
+            <div>
+                <label for="quantite" class="block mb-1">Quantité</label>
+                <input type="number" name="quantite" id="quantite" min="1" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-secondary">
+            </div>
+            <button type="submit" class="w-full py-2 px-4 bg-primary text-black font-semibold rounded hover:bg-yellow-400 transition-all">
+                <i class="fas fa-utensils mr-2"></i> Commander
+            </button>
+        </form>
+    </div>
+</body>
+</html>

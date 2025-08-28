@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander – {{ menu.nom }}</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFD700',
+                        secondary: '#4ADE80',
+                        dark: '#1A1A1A',
+                        glass: 'rgba(30,30,30,0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white font-sans">
+    <div class="max-w-2xl mx-auto mt-10 p-6 glass-card rounded-lg shadow-lg">
+        <!-- Titre -->
+        <h1 class="text-3xl font-display text-primary mb-2 text-center">Commander</h1>
+        <p class="text-center text-gray-300 mb-6">Confirmez votre commande ci-dessous</p>
+
+        <!-- Info plat -->
+        <div class="bg-gray-800 rounded-lg p-4 mb-6">
+            <h2 class="text-xl font-bold">{{ menu.nom }}</h2>
+            <p class="text-primary font-semibold" id="prixUnitaire">{{ menu.prix }}</p>
+            <span class="text-sm text-gray-400">FCFA / unité</span>
+        </div>
+
+        <!-- Formulaire -->
+        <form method="POST" id="commandeForm" class="space-y-4">
+            {% if current_user.is_authenticated %}
+            <p class="text-gray-300">Commande au nom de :
+                <strong>{{ current_user.username }}</strong> ({{ current_user.email }})
+            </p>
+            {% else %}
+            <div>
+                <label for="prenom" class="block mb-1">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required
+                       class="w-full p-2 rounded bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+                <label for="nom" class="block mb-1">Nom</label>
+                <input type="text" id="nom" name="nom" required
+                       class="w-full p-2 rounded bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+                <label for="address" class="block mb-1">Adresse</label>
+                <input type="text" id="address" name="address" required
+                       class="w-full p-2 rounded bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+                <label for="tel" class="block mb-1">Téléphone</label>
+                <input type="tel" id="tel" name="tel" required
+                       class="w-full p-2 rounded bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-primary">
+            </div>
+
+            <div>
+                <label for="quantite" class="block mb-1">Quantité</label>
+                <input type="number" id="quantite" name="quantite" min="1" value="1" required
+                       class="w-full p-2 rounded bg-gray-900 border border-gray-700 focus:ring-2 focus:ring-secondary">
+            </div>
+
+            <!-- Récap commande -->
+            <div class="bg-gray-800 p-4 rounded-lg">
+                <p class="text-lg">Total : <span id="totalPrix" class="text-primary font-semibold"></span> FCFA</p>
+            </div>
+
+            <div class="flex space-x-3">
+                <button type="submit"
+                        class="flex-1 py-2 px-4 bg-primary text-dark font-semibold rounded hover:bg-yellow-400 transition">
+                    Confirmer la commande
+                </button>
+            </div>
+            {% endif %}
+        </form>
+         <!-- jsPDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    </div>
+    <script>
+        const prixUnitaire = parseFloat(document.getElementById("prixUnitaire").textContent);
+        const quantiteInput = document.getElementById("quantite");
+        const totalPrix = document.getElementById("totalPrix");
+
+        // Fonction de calcul live
+        function updateTotal() {
+            const qte = parseInt(quantiteInput.value) || 1;
+            const total = qte * prixUnitaire;
+            totalPrix.textContent = total.toLocaleString();
+        }
+        quantiteInput.addEventListener("input", updateTotal);
+        updateTotal(); // calcul au chargement
+
+        // Génération PDF à la soumission
+        document.getElementById("commandeForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            console.log("Formulaire soumis");
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+
+            const prenom = document.getElementById("prenom").value ;
+            const nom = document.getElementById("nom").value ;
+            const adresse = document.getElementById("address").value;
+            const qte = parseInt(quantiteInput.value) || 1;
+            const total = qte * prixUnitaire;
+            const dateCommande = new Date().toLocaleString();
+
+            const logoUrl = "{{ url_for('static', filename='uploads/coindufoot.png') }}";
+            const img = new Image();
+            img.src = logoUrl;
+            img.onload = function() {
+                doc.addImage(img, "PNG", 80, 10, 50, 30);
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(16);
+                doc.text(" Restaurant Le Bon Goût", 105, 48, {align: "center"});
+
+                doc.setFontSize(14);
+                doc.text("Reçu de commande", 105, 62, {align: "center"});
+                doc.setFontSize(12);
+                doc.text(`Client : ${prenom} ${nom}`, 20, 80);
+                doc.text(`Adresse : ${adresse}`, 20, 88);
+                doc.text(`Plat : {{ menu.nom }}`, 20, 100);
+                doc.text(`Quantité : ${qte}`, 20, 108);
+                doc.text(`Prix unitaire : ${prixUnitaire.toLocaleString()} FCFA`, 20, 116);
+                doc.text(`Total : ${total.toLocaleString()} FCFA`, 20, 124);
+                doc.text(`Date et heure : ${dateCommande}`, 20, 132);
+
+                doc.save("recu_commande.pdf");
+                showConfirmationBanner("Commande confirmée avec succès !");
+
+                setTimeout(() => e.target.submit(), 800);
+            };
+        });
+
+        function showConfirmationBanner(message) {
+            const banner = document.getElementById("confirmationBanner");
+            const bannerText = document.getElementById("bannerText");
+            if (message) bannerText.textContent = message;
+            banner.classList.add("show");
+            setTimeout(() => banner.classList.remove("show"), 5000);
+        }
+    </script>
+    <!-- Bannière de confirmation -->
+    <div id="confirmationBanner"
+         class="fixed top-5 right-[-400px] opacity-0 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-3 transition-all duration-500 ease-in-out z-50">
+        <!-- Icône ✅ -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 13l4 4L19 7" />
+        </svg>
+        <span id="bannerText" class="font-semibold">Commande confirmée avec succès !</span>
+    </div>
+</body>
+</html>

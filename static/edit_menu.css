@@ -1,0 +1,80 @@
+body {
+  background-color: #1a1a1a;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #2d3748;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #f6c90e;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #ffa500;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background-color: #2d3748;
+  border: 1px solid #4a5568;
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+select option {
+  background-color: #2d3748;
+  color: #ffffff;
+}
+
+button[type="submit"] {
+  background-color: #f6c90e;
+  color: #1a1a1a;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #ffb347;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}

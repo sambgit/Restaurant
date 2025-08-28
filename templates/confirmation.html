@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirmation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div>
+    <h1>votre demande a été enregistrée</h1>
+    <p>Bonjour {{ prenom }} {{ nom }}</p>
+    <p>vous avez commande {{ menu_id }} au prix unitaire de {{ quantite }}.</p>
+    <p>Votre colis sera livré à l'addresse {{address}}</p>
+    <p>Merci pour la confiance !</p>
+  </div>
+</body>
+</html>

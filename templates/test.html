@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Inscription</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fafafa;
+      font-family: Arial, sans-serif;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px;
+      width: 100%;
+      background: #0078d4;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005a9e;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Formulaire d'inscription</h2>
+
+  <form action="/register" method="post">
+    <label>
+      Nom complet :
+      <input type="text" name="username" required>
+    </label>
+
+    <label>
+      Email :
+      <input type="email" name="email" required>
+    </label>
+
+    <label>
+      Mot de passe :
+      <input type="password" name="password" id="password" required>
+    </label>
+
+    <label>
+      Confirmation mot de passe :
+      <input type="password" name="confirm_password" id="confirm_password" required>
+    </label>
+
+    <label>
+      <input type="checkbox" name="acceptTerms" required>
+      J’accepte les <a href="#">Conditions</a> et la <a href="#">Politique de confidentialité</a>
+    </label>
+
+    <button type="submit">Créer un compte</button>
+  </form>
+  <script>
+        async function handleRegister(event){
+           event.preventDefault();
+           const password = document.getElementById('registerPassword').value;
+           const confirmPassword = document.getElementById('confirmPassword').value;
+           const acceptTerms = document.getElementById('acceptTerms').checked;
+
+        // Validation - TheDoc's input checking
+            if (password !== confirmPassword) {
+                showModal('error', 'Error', 'Passwords do not match.');
+                return;
+            }
+
+            if (!acceptTerms) {
+                showModal('error', 'Error', 'Please accept the Terms and Privacy Policy.');
+                return;
+            }
+        }
+  </script>
+</body>
+</html>

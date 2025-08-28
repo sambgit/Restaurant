@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modifier Réservation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='edit_menu.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Modifier le menu</h1>
+    <form action="/edit_menu/{{ men[0] }}" id = "filtered-table" method="POST" onsubmit="alert('Plat modifié avec succès !')" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label class="block mb-1">Nom du plat</label>
+                <input type="text" name="nom"  class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600"
+                      value="{{ men[1] }}">
+            </div>
+            <div>
+                <label class="block mb-1">Description</label>
+                <textarea name="description" rows="3" class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+                    {{ men[2] }}</textarea>
+            </div>
+            <div>
+                <label class="block mb-1">Prix (FCFA)</label>
+                <input type="number" step="100" name="prix"
+                       value="{{ men[3] }}" class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+            </div>
+            <div>
+                <label class="block mb-1">Image</label>
+                <input type="file" name="image" accept="image/*" value="{{ men[4] }}"  class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+            </div>
+            <div>
+                <label class="block mb-1">Catégorie</label>
+                {% set categories = ['Dejeuner', 'Entrer', 'Dinner', 'Dessert', 'Boisson', 'Vegetarien'] %}
+                <select name="categorie"  class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+                      <option value="">-- Sélectionner --</option>
+                      {% for cat in categories %}
+                        {% set selected = 'selected' if men[5] == cat else '' %}
+                        <option value="{{ cat }}" {{ selected }}>{{ cat }}</option>
+                      {% endfor %}
+                    </select>
+                </select>
+            </div>
+            <button type="submit" class="w-full py-2 px-4 bg-primary text-dark font-semibold rounded hover:bg-yellow-400">
+                Modifier le plat
+            </button>
+        </form>
+  </div>
+</body>
+</html>

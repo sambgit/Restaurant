@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register</title>
+    <meta name="author" content="TheDoc">
+    <meta name="description" content="Modern login system designed by TheDoc">
+    <link rel="stylesheet" href="{{url_for('static', filename='login_user.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <!-- TheDoc's floating animation background -->
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1" data-creator="TheDoc"></div>
+            <div class="shape shape-2" data-creator="TheDoc"></div>
+            <div class="shape shape-3" data-creator="TheDoc"></div>
+            <div class="shape shape-4" data-creator="TheDoc"></div>
+            <div class="shape shape-5" data-creator="TheDoc"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="auth-card">
+            <div class="card-header">
+                <h1 class="logo">
+                    <i class="fas fa-rocket"></i>
+                    Formulaire
+                </h1>
+                <div class="tab-switcher">
+                    <button class="tab-btn active" data-tab="login" title="TheDoc's Login">Sign In</button>
+                    <button class="tab-btn" data-tab="register" title="TheDoc's Register">Sign Up</button>
+                </div>
+            </div>
+
+            <!-- Login Form by TheDoc -->
+            <div class="form-container active" id="login-form">
+                <form class="auth-form" action="{{ url_for('login_user_route') }}" method="POST" id="loginForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="loginEmail" placeholder="Email Address" required data-designer="TheDoc">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Password" required data-designer="TheDoc">
+                            <button type="button" class="toggle-password" onclick="togglePassword('loginPassword')" title="TheDoc's password toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe" data-creator="TheDoc">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn primary" data-author="TheDoc">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn google" onclick="window.location.href='/google'" data-creator="TheDoc">
+                        <i class="fab fa-google"></i>
+                        Sign in with Google
+                    </button>
+
+                    <button class="social-btn facebook" data-creator="TheDoc">
+                        <i class="fab fa-facebook-f"></i>
+                        Sign in with Facebook
+                    </button>
+
+                    <button class="social-btn github" data-creator="TheDoc">
+                        <i class="fab fa-github"></i>
+                        Sign in with GitHub
+                    </button>
+                </div>
+            </div>
+
+            <!-- Register Form - Crafted by TheDoc -->
+            <div  class="form-container" id="register-form">
+                <form class="auth-form" action="/register" id="registerForm" method="post" data-developer="TheDoc">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="username" id="registerName" placeholder="Nom complet" required data-creator="TheDoc">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="email" id="registerEmail" placeholder="Email Address" required data-creator="TheDoc">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" id="registerPassword" placeholder="Password" required data-creator="TheDoc">
+                            <button type="button" class="toggle-password" onclick="togglePassword('registerPassword')" title="TheDoc's toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="confirm_password" id="confirmPassword" placeholder="Confirm Password" required data-creator="TheDoc">
+                            <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')" title="TheDoc's toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="password-strength" data-feature="TheDoc">
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Password Strength</span>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" name="acceptTerms" id="acceptTerms" required data-creator="TheDoc">
+                            <span class="checkmark"></span>
+                            I accept the <a href="#" data-link="TheDoc">Terms</a> and <a href="#" data-link="TheDoc">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn primary" data-author="TheDoc">
+                        <span>Create Account</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn google" onclick="window.location.href='/google/signup'" data-creator="TheDoc">
+                        <i class="fab fa-google"></i>
+                        Sign up with Google
+                    </button>
+
+                    <button class="social-btn facebook" data-creator="TheDoc">
+                        <i class="fab fa-facebook-f"></i>
+                        Sign up with Facebook
+                    </button>
+
+                    <button class="social-btn github" data-creator="TheDoc">
+                        <i class="fab fa-github"></i>
+                        Sign up with GitHub
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal - TheDoc's notification system -->
+    <div class="modal" id="successModal" data-designer="TheDoc">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>Success!</h3>
+            </div>
+            <div class="modal-body">
+                <p id="successMessage">Bienvenu(e)!</p>
+            </div>
+            <button class="auth-btn primary" onclick="closeModal()" data-creator="TheDoc">Continue</button>
+        </div>
+    </div>
+
+    <!-- Error Modal - TheDoc's error handling -->
+    <div class="modal" id="errorModal" data-designer="TheDoc">
+        <div class="modal-content error">
+            <div class="modal-header">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Error</h3>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage">An error occurred.</p>
+            </div>
+            <button class="auth-btn secondary" onclick="closeModal()" data-creator="TheDoc">OK</button>
+        </div>
+    </div>
+
+    <!-- TheDoc's JavaScript magic -->
+        <script src="{{ url_for('static', filename='login_user.js') }}"></script>
+</body>
+</html>
+            

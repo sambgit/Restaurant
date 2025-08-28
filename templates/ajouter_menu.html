@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css')}}">
+    <title>Ajouter Maneu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFD700',
+                        secondary: '#4ADE80',
+                        dark: '#1A1A1A',
+                        glass: 'rgba(30, 30, 30, 0.7)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <h1>Entrer les informations</h1>
+        <form method="POST" onsubmit="alert('Plat ajouté avec succès !')" enctype="multipart/form-data" class="space-y-4">
+            <div>
+                <label class="block mb-1">Nom du plat</label>
+                <input type="text" name="nom" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+            </div>
+            <div>
+                <label class="block mb-1">Description</label>
+                <textarea name="description" rows="3" class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600"></textarea>
+            </div>
+            <div>
+                <label class="block mb-1">Prix (FCFA)</label>
+                <input type="number" step="100" name="prix" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+            </div>
+            <div>
+                <label class="block mb-1">Image</label>
+                <input type="file" name="image" accept="image/*" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+            </div>
+            <div>
+                <label class="block mb-1">Catégorie</label>
+                <select name="categorie" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Dejeuner">Déjeuner</option>
+                    <option value="Entrer">Entrer</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Boisson">Boisson</option>
+                    <option value="Vegetarien">Végétarien</option>
+                </select>
+            </div>
+            <button type="submit" class="w-full py-2 px-4 bg-primary text-dark font-semibold rounded hover:bg-yellow-400">
+                Ajouter le plat
+            </button>
+        </form>
+</body>
+</html>

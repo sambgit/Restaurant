@@ -55,7 +55,7 @@ def allowed_file(filename):
 
 def get_db_connction():
     return psycopg2.connect(
-        host=os.getsid('DB_HOST'),
+        host=os.getenv('DB_HOST'),
         database=os.getenv('DB_NAME'),
         user=os.getenv('DB_USER'),
         password=os.getenv('DB_PASSWORD'),

@@ -1,7 +1,7 @@
 from datetime import datetime
 #import sqlite3
 #import oauth
-from oauthlib.oauth2 import WebApplicationClient
+#from oauthlib.oauth2 import WebApplicationClient
 import psycopg2
 import unicodedata
 from flask_login import LoginManager, login_user, UserMixin,logout_user ,current_user
@@ -483,7 +483,7 @@ def login_user_route():
         pw = request.form['password']
         conn=get_db_connction()
         #conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
+        #conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         cur.execute('SELECT id,username, password FROM users WHERE email = %s', (email,))
         data = cur.fetchone()
@@ -555,7 +555,7 @@ def load_user(user_id):
     try:
         conn=get_db_connction()
         #conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
+        #conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         cur.execute("SELECT id, username, email FROM users WHERE id = %s", (user_id,))
         row = cur.fetchone()
@@ -599,7 +599,7 @@ def google_authorize():
 
     # 3. Connexion BDD
     conn = get_db_connction()
-    conn.row_factory = sqlite3.Row
+    #conn.row_factory = sqlite3.Row
     cur = conn.cursor()
 
     cur.execute("SELECT * FROM users WHERE email = %s", (email,))

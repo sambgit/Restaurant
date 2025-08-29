@@ -177,7 +177,7 @@ def normalize_txt(txt):
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('home2.html')
 
 #login super admin
 @app.route('/super_admin', methods=['GET', 'POST'])
@@ -221,7 +221,7 @@ def super_admin():
 @app.route('/super_admin/search', methods=['GET'])
 def search_admin():
     a = request.args.get('a', '').strip()
-    conn=get_db_connction()
+    conn = get_db_connction()
     #conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     if a:
@@ -481,7 +481,7 @@ def login_user_route():
     if request.method == 'POST':
         email = request.form['email']
         pw = request.form['password']
-        conn=get_db_connction()
+        conn = get_db_connction()
         #conn = sqlite3.connect(DB_PATH)
         #conn.row_factory = sqlite3.Row
         cur = conn.cursor()

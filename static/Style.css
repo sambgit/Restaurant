@@ -16,8 +16,6 @@ body {
        min-height: 100vh;
 }
 
-
-
 .glass-card {
      background: rgba(30, 30, 30, 0.7);
      backdrop-filter: blur(10px);
@@ -26,12 +24,9 @@ body {
 
 }
 
-
-
 .recipe-card {
           transition: all 0.3s ease;
 }
-
 
 .recipe-card:hover {
 
@@ -40,40 +35,23 @@ body {
 
 }
 
-
-
 .category-btn {
-
        transition: all 0.2s ease;
-
 }
-
-
 
 .category-btn:hover {
 
     transform: scale(1.05);
-
 }
 
-
-
 .play-btn {
-
      transition: all 0.3s ease;
-
 }
 
 .play-btn:hover {
-
-transform: scale(1.1);
-
+    transform: scale(1.1);
 }
 
-
-
 .hero-overlay {
-
     background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-
 }

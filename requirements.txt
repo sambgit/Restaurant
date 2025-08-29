@@ -1,4 +1,5 @@
 Flask==3.0.3
+flask_login
 python-dotenv==1.1.1
 gunicorn
 psycopg2-binary

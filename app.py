@@ -71,7 +71,7 @@ def init_db():
     #cur.execute("ALTER TABLE users RENAME COLUMN nom TO username")
     cur.execute('''
                     CREATE TABLE IF NOT EXISTS super_admins (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        id SERIAL PRIMARY KEY ,
                         username TEXT UNIQUE NOT NULL,
                         password TEXT NOT NULL
                     )
@@ -80,7 +80,7 @@ def init_db():
 
     cur.execute('''
                     CREATE TABLE IF NOT EXISTS admins (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        id SERIAL PRIMARY KEY ,
                         username TEXT UNIQUE NOT NULL,
                         password TEXT NOT NULL,
                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -90,7 +90,7 @@ def init_db():
     print("Table admins créée")
     cur.execute('''
                         CREATE TABLE IF NOT EXISTS users (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            id SERIAL PRIMARY KEY ,
                             nom TEXT NOT NULL,
                             email TEXT UNIQUE NOT NULL,
                             password TEXT ,
@@ -117,7 +117,7 @@ def init_db():
 
     cur.execute('''
                     CREATE TABLE IF NOT EXISTS commandes (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        id SERIAL PRIMARY KEY ,
                         prenom TEXT NOT NULL,
                         nom TEXT NOT NULL,                        
                         address TEXT NOT NULL,
@@ -131,7 +131,7 @@ def init_db():
     #cur.execute("ALTER TABLE menu_items DROP COLUMN total")
     cur.execute('''
                        CREATE TABLE IF NOT EXISTS menu_items (
-                           id INTEGER PRIMARY KEY AUTOINCREMENT,
+                           id SERIAL PRIMARY KEY ,
                            nom TEXT NOT NULL,
                            description TEXT,
                            prix REAL NOT NULL,
@@ -143,7 +143,7 @@ def init_db():
     print("Table menu_items créée")
     cur.execute('''
                            CREATE TABLE IF NOT EXISTS commande_items (
-                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               id SERIAL PRIMARY KEY ,
                                commande_id INTEGER NOT NULL,
                                menu_id INTEGER NOT NULL,
                                quantite INTEGER NOT NULL,

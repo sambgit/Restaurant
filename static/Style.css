@@ -64,6 +64,12 @@ body {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
+.bg-glass {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+
 .category-btn {
     transition: all 0.2s ease;
 }
@@ -81,7 +87,8 @@ body {
 }
 
 .hero-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    /*background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);*/
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3), transparent);
 }
 
 #confirmationBanner.show {

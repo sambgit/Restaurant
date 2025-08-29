@@ -135,7 +135,7 @@ def init_db():
                            nom TEXT NOT NULL,
                            description TEXT,
                            prix REAL NOT NULL,
-                           image BLOB,
+                           image BYTEA,
                            categorie TEXT NOT NULL
                        )
            ''')

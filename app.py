@@ -895,6 +895,7 @@ def confirmation_paiement():
     else:
         return render_template('confirmation.html', status="failed")
 
+init_db()
+
 if __name__ == '__main__':
-    init_db()
     app.run(debug=True)

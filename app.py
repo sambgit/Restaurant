@@ -105,7 +105,7 @@ def init_db():
 
     cur.execute('''
                     CREATE TABLE IF NOT EXISTS reservations (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        id SERIAL PRIMARY KEY ,
                         prenom TEXT NOT NULL,
                         nom TEXT NOT NULL,
                         n_places TEXT NOT NULL,

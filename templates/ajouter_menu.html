@@ -28,7 +28,7 @@
 </head>
 <body>
     <h1>Entrer les informations</h1>
-        <form method="POST" onsubmit="alert('Plat ajouté avec succès !')" enctype="multipart/form-data" class="space-y-4">
+        <form method="POST" id="menu_form"  enctype="multipart/form-data" class="space-y-4"> <!--onsubmit="alert('Plat ajouté avec succès !')"!-->
             <div>
                 <label class="block mb-1">Nom du plat</label>
                 <input type="text" name="nom" required class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600">
@@ -61,5 +61,29 @@
                 Ajouter le plat
             </button>
         </form>
+        <script>
+            document.getElementById("menu_form").addEventListener("submit", function(e){
+                e.preventDefault();
+                ShowConfirmationBanner("Plat ajouté avec succès !");
+                setTimeout(() => e.target.submit(), 800);
+            });
+
+            function showConfirmationBanner(message){
+                const banner = getElementById("confiermationBanner");
+                const textBanner = getElementById("bannerText");
+                if(message) textBanner.textContent = message;
+                    banner.classList.add("show");
+                    setTimeout(() =>banner.classList.remove("show"), 5000);
+            }
+        </script>
+        <div id="confirmationBanner"
+                 class="fixed top-5 right-[-400px] opacity-0 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-3 transition-all duration-500 ease-in-out z-50">
+                <!-- Icône ✅ -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M5 13l4 4L19 7" />
+                </svg>
+                <span id="bannerText" class="font-semibold">Plat ajouté avec succès !</span>
+        </div>
 </body>
 </html>

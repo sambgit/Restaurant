@@ -1,0 +1,80 @@
+ <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+
+            background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+
+            color: #F5F5F5;
+
+            min-height: 100vh;
+
+        }
+
+        .glass-card {
+
+            background: rgba(30, 30, 30, 0.7);
+
+            backdrop-filter: blur(10px);
+
+            -webkit-backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+
+
+        .recipe-card {
+
+            transition: all 0.3s ease;
+
+        }
+
+        .recipe-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .category-btn {
+
+            transition: all 0.2s ease;
+
+        }
+
+
+
+        .category-btn:hover {
+
+            transform: scale(1.05);
+
+        }
+
+
+
+        .play-btn {
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .play-btn:hover {
+
+            transform: scale(1.1);
+
+        }
+
+
+
+        .hero-overlay {
+
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+
+        }
+
+    </style>

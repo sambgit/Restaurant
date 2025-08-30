@@ -177,7 +177,7 @@ def normalize_txt(txt):
 
 @app.route('/')
 def index():
-    return render_template('home2.html')
+    return render_template('home.html')
 
 #login super admin
 @app.route('/super_admin', methods=['GET', 'POST'])
